@@ -1,0 +1,4 @@
+[submodule "structure"]
+	path = structure
+	url = https://github.com/project-yoru/aurora-core-structure
+	branch = master

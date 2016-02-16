@@ -1,0 +1,25 @@
+{
+  "name": "aurora-core-builder",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {},
+  "devDependencies": {
+    "coffee-script": "^1.10.0",
+    "del": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-git": "^1.7.0",
+    "gulp-load-plugins": "^1.2.0",
+    "gulp-param": "^1.0.3",
+    "gutil": "^1.6.4",
+    "run-sequence": "^1.1.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/project-yoru/aurora-core-builder.git"
+  },
+  "author": "Nano WANG <nano.middlename.wang@gmail.com> (http://github.com/nanowang)",
+  "bugs": {
+    "url": "https://github.com/project-yoru/aurora-core-builder/issues"
+  },
+  "homepage": "https://github.com/project-yoru/aurora-core-builder"
+}
