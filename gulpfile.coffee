@@ -3,6 +3,7 @@ $ = require('gulp-load-plugins')()
 runSequence = require('run-sequence')
 gutil = require('gutil')
 del = require('del')
+exec = require('child_process').exec
 
 Options = {}
 
@@ -19,19 +20,26 @@ gulp.task 'clear-app-content', (callback) ->
 
 gulp.task 'clone-app-content', (callback) ->
   # TODO handle custom branch
-  # TODO log progress
+  # TODO log git clone progress
 
-  $.git
-    .clone "https://github.com/#{Options.appContentRepoPath}", {args: './app_content'}
-    .on 'error', gutil.log
+  exec "git clone https://github.com/#{Options.appContentRepoPath} ./app_content", (err, stdout, stderr) ->
+    gutil.log stdout
+    gutil.log stderr
+    callback err
 
 gulp.task 'init-dist', (callback) ->
+  runSequence 'clear-dist', 'copy-structure-as-dist', callback
+
+gulp.task 'clear-dist', (callback) ->
+  del ['./app_dist'], { force: true }, callback
+
+gulp.task 'copy-structure-as-dist', (callback) ->
   gulp
     .src './structure/**'
     .pipe gulp.dest './app_dist'
 
 gulp.task 'merge-content', (callback) ->
-  # TODO
+  # merge resources in app_content into app_dist
 
 gulp.task 'build', (appContentRepoPath, appContentRepoBranch = 'master', environment = 'development', callback) ->
   # TODO logging
