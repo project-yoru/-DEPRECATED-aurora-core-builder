@@ -1,3 +1,6 @@
+# TODO
+# - gulp-debug
+
 gulp = require('gulp-param')(require('gulp'), process.argv);
 $ = require('gulp-load-plugins')()
 runSequence = require('run-sequence')
@@ -11,7 +14,8 @@ Options = {}
 # 
 #   $.git.addSubmodule('https://github.com/project-yoru/aurora-core-structure', 'structure', { args: '--force -b master'})
 
-gulp.task 'init-app-content', ['clear-app-content', 'clone-app-content']
+gulp.task 'init-app-content', (callback) ->
+  runSequence 'clear-app-content', 'clone-app-content', callback
 
 gulp.task 'clear-app-content', (callback) ->
   # TODO update instead of rm & re-clone
@@ -38,20 +42,22 @@ gulp.task 'clone-app-content', (callback) ->
       callback err
 
 gulp.task 'merge-app-content-with-structure', (callback) ->
-  # clean
+  runSequence 'clean-app-merged', 'copy-structure-to-app-merged', 'copy-app-content-to-app-merged', callback
+
+gulp.task 'clean-app-merged', ->
   gulp
     .src './app_merged', { read: false }
     .pipe $.rimraf()
 
-  # copy structure to app_merged
+gulp.task 'copy-structure-to-app-merged', ->
   gulp
     .src [ './structure/**' ], { dot: true }
     .pipe gulp.dest './app_merged'
 
-  # merge contents in app_content into app_merged
+gulp.task 'copy-app-content-to-app-merged', ->
   gulp
     .src [ './app_content/config', './app_content/resources', './app_content/story' ], { dot: true }
-    .pipe gulp.dest './app_merged/app'
+    .pipe gulp.dest './app_merged/app/'
 
 gulp.task 'build-app', (callback) ->
 
