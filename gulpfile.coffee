@@ -10,9 +10,12 @@ exec = require('child_process').exec
 Options = {}
 
 # gulp.task 'init-structure', ->
-#   clone/update structure, install npm, bower, gem packages, etc
-# 
-#   $.git.addSubmodule('https://github.com/project-yoru/aurora-core-structure', 'structure', { args: '--force -b master'})
+  # clone/update structure, install npm, bower, gem packages, etc
+
+  # $.git.addSubmodule('https://github.com/project-yoru/aurora-core-structure', 'structure', { args: '--force -b master'})
+
+# gulp.task 'update-structure', ->
+  # clone/update structure, install npm, bower, gem packages, etc
 
 gulp.task 'init-app-content', (callback) ->
   runSequence 'clear-app-content', 'clone-app-content', callback
@@ -56,7 +59,7 @@ gulp.task 'copy-structure-to-app-merged', ->
 
 gulp.task 'copy-app-content-to-app-merged', ->
   gulp
-    .src [ './app_content/config', './app_content/resources', './app_content/story' ], { dot: true }
+    .src [ './app_content/{config,resources,story}/**/*' ], { dot: true }
     .pipe gulp.dest './app_merged/app/'
 
 gulp.task 'build-app', (callback) ->
@@ -95,7 +98,6 @@ gulp.task 'build', (appContentRepoPath, appContentRepoBranch = 'master', environ
   Options['appContentRepoBranch'] = appContentRepoBranch
 
   runSequence(
-    # 'init-structure'
     'init-app-content'
     'merge-app-content-with-structure'
     'build-app'
