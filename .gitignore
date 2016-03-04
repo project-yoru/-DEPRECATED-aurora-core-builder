@@ -1,3 +1,4 @@
 /node_modules
+
 /app_content
-/app_dist
+/app_merged
