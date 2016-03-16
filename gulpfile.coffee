@@ -54,7 +54,8 @@ gulp.task 'clean-app-merged', ->
 
 gulp.task 'copy-structure-to-app-merged', ->
   gulp
-    .src [ './structure/**' ], { dot: true }
+    # TODO ignore files like `.git`
+    .src [ './structure/**', '!.git' ], { dot: true }
     .pipe gulp.dest './app_merged'
 
 gulp.task 'copy-app-content-to-app-merged', ->

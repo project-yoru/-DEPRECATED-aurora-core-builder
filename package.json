@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/project-yoru/aurora-core-builder/issues"
   },
-  "homepage": "https://github.com/project-yoru/aurora-core-builder"
+  "homepage": "https://github.com/project-yoru/aurora-core-builder",
+  "scripts": {
+    "build": "gulp build"
+  }
 }
