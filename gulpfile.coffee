@@ -73,21 +73,6 @@ gulp.task 'build-app', (callback) ->
     gutil.log stderr
     callback err
 
-gulp.task 'cleanup', (callback) ->
-  files_to_exclude_in_structure = [
-    'bower.json'
-    'Gemfile'
-    'Gemfile.lock'
-    'gulpfile.coffee'
-    'LICENSE'
-    'package.json'
-    'README.md'
-    'TODO'
-    'wct.conf.js'
-  ]
-
-  # TODO rm
-
 gulp.task 'build', (appContentRepoPath, appContentRepoBranch = 'master', environment = 'development', callback) ->
   # TODO logging
 
@@ -102,5 +87,4 @@ gulp.task 'build', (appContentRepoPath, appContentRepoBranch = 'master', environ
     'init-app-content'
     'merge-app-content-with-structure'
     'build-app'
-    'cleanup'
   )
