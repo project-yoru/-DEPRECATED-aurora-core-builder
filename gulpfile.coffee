@@ -39,7 +39,7 @@ gulp.task 'clone-app-content', (callback) ->
     console.log 'NO appContentRepoPath, skipping cloning'
     callback()
   else
-    exec "git clone https://github.com/#{Options.appContentRepoPath} ./app_content", (err, stdout, stderr) ->
+    exec "git clone --depth=1 https://github.com/#{Options.appContentRepoPath} ./app_content", (err, stdout, stderr) ->
       gutil.log stdout
       gutil.log stderr
       callback err
@@ -68,7 +68,6 @@ gulp.task 'build-app', (callback) ->
   build_command = 'cd ./app_merged && gulp'
 
   exec "bash -lc \"#{build_command}\"", (err, stdout, stderr) ->
-  # exec 'source ~/.rvm/scripts/rvm && cd ./app_merged && gulp', (err, stdout, stderr) ->
     gutil.log stdout
     gutil.log stderr
     callback err
